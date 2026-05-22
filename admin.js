@@ -340,3 +340,46 @@ async ()=>{
   window.location.href='login.html';
 
 });
+/* =========================
+   LOAD USER REQUESTS
+========================= */
+
+const requestContainer =
+document.getElementById('requestContainer');
+
+async function loadRequests(){
+
+  const querySnapshot =
+  await getDocs(collection(db,'requests'));
+
+  requestContainer.innerHTML='';
+
+  querySnapshot.forEach((item)=>{
+
+    const data = item.data();
+
+    requestContainer.innerHTML += `
+
+      <div class="request-card">
+
+        <h3>
+          ❓ ${data.question}
+        </h3>
+
+        <p>
+          👤 ${data.name}
+        </p>
+
+        <p>
+          📧 ${data.email}
+        </p>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+loadRequests();

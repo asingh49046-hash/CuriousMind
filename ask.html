@@ -1,145 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Ask Question | CuriousMind</title>
 
   <link rel="stylesheet" href="style.css">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
+
 <body>
 
 <!-- NAVBAR -->
 
-<nav class="navbar">
+<nav class="home-navbar">
 
   <div class="logo">
     CuriousMind
   </div>
 
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="ask.html" class="active">Ask Question</a>
-    <a href="login.html">Admin</a>
+  <div class="nav-menu">
+
+    <a href="index.html">
+      Home
+    </a>
+
+    <a href="ask.html" class="active">
+      Ask Question
+    </a>
+
+    <a href="login.html">
+      Admin
+    </a>
+
   </div>
 
 </nav>
 
-<!-- HERO SECTION -->
+<!-- ASK SECTION -->
 
-<section class="hero">
-
-  <div class="hero-content">
-
-    <h1>
-      Ask Anything Around You 🌍
-    </h1>
-
-    <p>
-      Discover answers to daily curiosity questions with the power of knowledge.
-    </p>
-
-  </div>
-
-</section>
-
-<!-- ASK FORM -->
-
-<section class="ask-section">
+<section class="ask-page">
 
   <div class="ask-card">
 
-    <div class="card-top">
+    <h1>
+      Ask Your Curiosity 🤔
+    </h1>
 
-      <h2>Submit Your Curiosity</h2>
+    <p>
+      Submit your question and our admin will answer it.
+    </p>
 
-      <p>
-        Share your question and answer with the world.
-      </p>
-
-    </div>
-
-    <form id="questionForm">
+    <form id="requestForm">
 
       <div class="input-group">
 
-        <label>Question Title</label>
-
-        <input
-          type="text"
-          id="question"
-          placeholder="Why does body powder feel cool?"
-          required
-        >
-
-      </div>
-
-      <div class="input-group">
-
-        <label>Detailed Answer</label>
+        <label>
+          Ask Question
+        </label>
 
         <textarea
-          id="answer"
-          placeholder="Write your detailed answer here..."
+          id="question"
+          placeholder="Write your question..."
           required
         ></textarea>
 
       </div>
 
-      <div class="double-input">
+      <div class="input-group">
 
-        <div class="input-group">
+        <label>
+          Your Name
+        </label>
 
-          <label>Category</label>
-
-          <select id="category">
-
-            <option>Science</option>
-            <option>Technology</option>
-            <option>Nature</option>
-            <option>Psychology</option>
-            <option>Human Body</option>
-            <option>Space</option>
-            <option>Daily Life</option>
-
-          </select>
-
-        </div>
-
-        <div class="input-group">
-
-          <label>Your Name</label>
-
-          <input
-            type="text"
-            id="username"
-            placeholder="Enter your name"
-          >
-
-        </div>
+        <input
+          type="text"
+          id="name"
+          placeholder="Enter your name"
+          required
+        >
 
       </div>
 
       <div class="input-group">
 
-        <label>Tags</label>
+        <label>
+          Your Gmail
+        </label>
 
         <input
-          type="text"
-          id="tags"
-          placeholder="science, cooling, body powder"
+          type="email"
+          id="email"
+          placeholder="Write a valid email"
+          required
         >
 
       </div>
 
-      <button type="submit" class="submit-btn">
+      <button type="submit" class="publish-btn">
 
-        🚀 Publish Question
+        🚀 Submit Request
 
       </button>
 
@@ -148,26 +113,6 @@
   </div>
 
 </section>
-
-<!-- SUCCESS POPUP -->
-
-<div id="successPopup" class="popup">
-
-  <div class="popup-content">
-
-    <h2>✅ Question Published</h2>
-
-    <p>
-      Your curiosity has been shared successfully.
-    </p>
-
-    <button onclick="closePopup()">
-      OK
-    </button>
-
-  </div>
-
-</div>
 
 <script type="module" src="ask.js"></script>
 

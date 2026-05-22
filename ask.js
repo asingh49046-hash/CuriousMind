@@ -4,51 +4,48 @@ import {
   addDoc
 } from './firebase.js';
 
-const form = document.getElementById('questionForm');
+const requestForm =
+document.getElementById('requestForm');
 
-const popup = document.getElementById('successPopup');
-
-form.addEventListener('submit', async (e) => {
+requestForm.addEventListener(
+'submit',
+async (e)=>{
 
   e.preventDefault();
 
-  const question = document.getElementById('question').value;
+  const question =
+  document.getElementById('question').value;
 
-  const answer = document.getElementById('answer').value;
+  const name =
+  document.getElementById('name').value;
 
-  const category = document.getElementById('category').value;
+  const email =
+  document.getElementById('email').value;
 
-  const username = document.getElementById('username').value;
+  try{
 
-  const tags = document.getElementById('tags').value;
+    await addDoc(
+      collection(db,'requests'),
+      {
 
-  try {
+        question,
+        name,
+        email,
+        createdAt:new Date()
 
-    await addDoc(collection(db, 'questions'), {
+      }
+    );
 
-      question,
-      answer,
-      category,
-      username,
-      tags,
-      createdAt: new Date()
+    alert(
+      'Request Submitted Successfully'
+    );
 
-    });
+    requestForm.reset();
 
-    popup.style.display = 'flex';
-
-    form.reset();
-
-  } catch(error){
+  }catch(error){
 
     alert(error.message);
 
   }
 
 });
-
-window.closePopup = function(){
-
-  popup.style.display = 'none';
-
-}
