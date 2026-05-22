@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Login | CuriousMind</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- BACKGROUND -->
+
+<div class="login-page">
+
+  <!-- LEFT SIDE -->
+
+  <div class="login-left">
+
+    <div class="overlay"></div>
+
+    <div class="left-content">
+
+      <h1>
+        CuriousMind
+      </h1>
+
+      <p>
+        Manage curiosity questions with powerful admin controls.
+      </p>
+
+      <div class="feature-list">
+
+        <div class="feature-item">
+          ✅ Manage Questions
+        </div>
+
+        <div class="feature-item">
+          ✅ Secure Admin Access
+        </div>
+
+        <div class="feature-item">
+          ✅ Firebase Authentication
+        </div>
+
+        <div class="feature-item">
+          ✅ Real-time Database
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- RIGHT SIDE -->
+
+  <div class="login-right">
+
+    <div class="login-card">
+
+      <div class="login-top">
+
+        <h2>Welcome Back </h2>
+
+        <p>
+          Login to access your admin dashboard
+        </p>
+
+      </div>
+
+      <form id="loginForm">
+
+        <div class="input-box">
+
+          <label>Email Address</label>
+
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter admin email"
+            required
+          >
+
+        </div>
+
+        <div class="input-box">
+
+          <label>Password</label>
+
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter password"
+            required
+          >
+
+        </div>
+
+        <div class="forgot-box">
+
+          <a href="#" id="forgotPassword">
+            Forgot Password?
+          </a>
+
+        </div>
+
+        <button type="submit" class="login-btn">
+
+          🔐 Login Securely
+
+        </button>
+
+      </form>
+
+      <div class="login-footer">
+
+        Protected by Firebase Authentication
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- LOADER -->
+
+<div id="loader" class="loader">
+
+  <div class="spinner"></div>
+
+</div>
+
+<script type="module" src="login.js"></script>
+
+</body>
+</html>

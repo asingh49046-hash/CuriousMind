@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CuriousMind</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="home-navbar">
+
+  <div class="logo">
+    CuriousMind
+  </div>
+
+  <div class="nav-menu">
+
+    <a href="index.html" class="active">
+      Home
+    </a>
+
+    <a href="ask.html">
+      Ask Question
+    </a>
+
+    <a href="login.html">
+      Admin
+    </a>
+
+  </div>
+
+</nav>
+
+<!-- HERO SECTION -->
+
+<section class="hero-section">
+
+  <div class="hero-left">
+
+    <span class="tagline">
+      🌍 Curiosity Starts Here
+    </span>
+
+    <h1>
+      Ask Questions <br>
+      Explore Knowledge <br>
+      Discover Answers
+    </h1>
+
+    <p>
+      CuriousMind helps people understand the science,
+      technology and mysteries behind everyday life.
+    </p>
+
+    <div class="hero-buttons">
+
+      <a href="ask.html" class="primary-btn">
+        🚀 Ask Question
+      </a>
+
+      <a href="#latest" class="secondary-btn">
+        📚 Explore Answers
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="hero-right">
+
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
+      alt="hero"
+    >
+
+  </div>
+
+</section>
+
+<!-- STATS -->
+
+<section class="stats-section">
+
+  <div class="stat-box">
+
+    <h2 id="questionCount">
+      0
+    </h2>
+
+    <p>Total Questions</p>
+
+  </div>
+
+  <div class="stat-box">
+
+    <h2>
+      24+
+    </h2>
+
+    <p>Categories</p>
+
+  </div>
+
+  <div class="stat-box">
+
+    <h2>
+      100%
+    </h2>
+
+    <p>Real Curiosity</p>
+
+  </div>
+
+  <div class="stat-box">
+
+    <h2>
+      ∞
+    </h2>
+
+    <p>Learning</p>
+
+  </div>
+
+</section>
+
+<!-- SEARCH -->
+
+<section class="search-section">
+
+  <h2>
+    Search Curiosity Questions
+  </h2>
+
+  <div class="search-box-modern">
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search anything..."
+    >
+
+  </div>
+
+</section>
+
+<!-- LATEST QUESTIONS -->
+
+<section class="latest-section" id="latest">
+
+  <div class="section-title">
+
+    <h2>
+      Latest Questions
+    </h2>
+
+    <p>
+      Explore recently added curiosity questions.
+    </p>
+
+  </div>
+
+  <div id="questionContainer" class="modern-grid"></div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+  <h2>CuriousMind</h2>
+
+  <p>
+    © 2026 CuriousMind. All rights reserved.
+  </p>
+
+
+<script type="module" src="app.js"></script>
+
+</body>
+</html>

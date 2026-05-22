@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Ask Question | CuriousMind</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+  <div class="logo">
+    CuriousMind
+  </div>
+
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="ask.html" class="active">Ask Question</a>
+    <a href="login.html">Admin</a>
+  </div>
+
+</nav>
+
+<!-- HERO SECTION -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <h1>
+      Ask Anything Around You 🌍
+    </h1>
+
+    <p>
+      Discover answers to daily curiosity questions with the power of knowledge.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- ASK FORM -->
+
+<section class="ask-section">
+
+  <div class="ask-card">
+
+    <div class="card-top">
+
+      <h2>Submit Your Curiosity</h2>
+
+      <p>
+        Share your question and answer with the world.
+      </p>
+
+    </div>
+
+    <form id="questionForm">
+
+      <div class="input-group">
+
+        <label>Question Title</label>
+
+        <input
+          type="text"
+          id="question"
+          placeholder="Why does body powder feel cool?"
+          required
+        >
+
+      </div>
+
+      <div class="input-group">
+
+        <label>Detailed Answer</label>
+
+        <textarea
+          id="answer"
+          placeholder="Write your detailed answer here..."
+          required
+        ></textarea>
+
+      </div>
+
+      <div class="double-input">
+
+        <div class="input-group">
+
+          <label>Category</label>
+
+          <select id="category">
+
+            <option>Science</option>
+            <option>Technology</option>
+            <option>Nature</option>
+            <option>Psychology</option>
+            <option>Human Body</option>
+            <option>Space</option>
+            <option>Daily Life</option>
+
+          </select>
+
+        </div>
+
+        <div class="input-group">
+
+          <label>Your Name</label>
+
+          <input
+            type="text"
+            id="username"
+            placeholder="Enter your name"
+          >
+
+        </div>
+
+      </div>
+
+      <div class="input-group">
+
+        <label>Tags</label>
+
+        <input
+          type="text"
+          id="tags"
+          placeholder="science, cooling, body powder"
+        >
+
+      </div>
+
+      <button type="submit" class="submit-btn">
+
+        🚀 Publish Question
+
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+<!-- SUCCESS POPUP -->
+
+<div id="successPopup" class="popup">
+
+  <div class="popup-content">
+
+    <h2>✅ Question Published</h2>
+
+    <p>
+      Your curiosity has been shared successfully.
+    </p>
+
+    <button onclick="closePopup()">
+      OK
+    </button>
+
+  </div>
+
+</div>
+
+<script type="module" src="ask.js"></script>
+
+</body>
+</html>

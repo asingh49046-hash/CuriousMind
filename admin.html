@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CuriousMind Admin</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="admin-layout">
+
+  <aside class="sidebar">
+
+    <div class="sidebar-top">
+
+      <h2>CuriousMind</h2>
+
+      <p>Admin Panel</p>
+
+    </div>
+
+    <div class="sidebar-menu">
+
+      <a href="index.html">🏠 Home</a>
+
+      <a href="ask.html">❓ Ask Question</a>
+
+      <a href="#" class="active">📊 Dashboard</a>
+
+    </div>
+
+    <div class="logout-box">
+
+      <button id="logoutBtn">
+        🚪 Logout
+      </button>
+
+    </div>
+
+  </aside>
+
+  <!-- MAIN CONTENT -->
+
+  <main class="admin-main">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+      <div>
+
+        <h1>Dashboard Overview</h1>
+
+        <p>
+          Manage curiosity questions and answers.
+        </p>
+
+      </div>
+
+      <div class="admin-profile">
+
+        <img
+          src="https://i.imgur.com/6VBx3io.png"
+          alt="admin"
+        >
+
+        <div>
+          <h3>Admin</h3>
+          <p>Super User</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- STATS -->
+
+    <div class="stats-grid">
+
+      <div class="stats-card">
+
+        <h2 id="totalQuestions">0</h2>
+
+        <p>Total Questions</p>
+
+      </div>
+
+      <div class="stats-card">
+
+        <h2>24</h2>
+
+        <p>Categories</p>
+
+      </div>
+
+      <div class="stats-card">
+
+        <h2>100%</h2>
+
+        <p>System Status</p>
+
+      </div>
+
+    </div>
+
+    <!-- QUESTIONS -->
+
+    <div class="dashboard-section">
+
+      <div class="section-header">
+
+        <h2>All Questions</h2>
+
+        <input
+          type="text"
+          id="adminSearch"
+          placeholder="Search questions..."
+        >
+
+      </div>
+
+      <div id="adminContainer" class="admin-question-grid"></div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<script type="module" src="admin.js"></script>
+
+</body>
+</html>
