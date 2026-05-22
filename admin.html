@@ -33,7 +33,7 @@
 
       <a href="index.html">🏠 Home</a>
 
-      <a href="ask.html">❓ Ask Question</a>
+     
 
       <a href="#" class="active">📊 Dashboard</a>
 
@@ -112,7 +112,114 @@
       </div>
 
     </div>
+<!-- WRITE QUESTION -->
 
+<div class="write-section">
+
+  <div class="write-top">
+
+    <h2>
+      ✍️ Write Question & Answer
+    </h2>
+
+    <p>
+      Publish detailed curiosity questions directly from admin panel.
+    </p>
+
+  </div>
+
+  <form id="adminQuestionForm">
+
+    <div class="admin-input-group">
+
+      <label>
+        Question Title
+      </label>
+
+      <input
+        type="text"
+        id="question"
+        placeholder="write a question?"
+        required
+      >
+
+    </div>
+
+    <div class="admin-input-group">
+
+      <label>
+        Detailed Answer
+      </label>
+
+      <textarea
+        id="answer"
+        placeholder="Write detailed explanation..."
+        required
+      ></textarea>
+
+    </div>
+
+    <div class="admin-double">
+
+      <div class="admin-input-group">
+
+        <label>
+          Category
+        </label>
+
+        <select id="category">
+
+          <option>Science</option>
+          <option>Technology</option>
+          <option>Human Body</option>
+          <option>Nature</option>
+          <option>Psychology</option>
+          <option>Space</option>
+          <option>Daily Life</option>
+
+        </select>
+
+      </div>
+
+      <div class="admin-input-group">
+
+        <label>
+          Author Name
+        </label>
+
+        <input
+          type="text"
+          id="username"
+          placeholder="Admin"
+        >
+
+      </div>
+
+    </div>
+
+    <div class="admin-input-group">
+
+      <label>
+        Tags
+      </label>
+
+      <input
+        type="text"
+        id="tags"
+        placeholder="science, cooling, powder"
+      >
+
+    </div>
+
+    <button type="submit" class="publish-btn">
+
+      🚀 Publish Question
+
+    </button>
+
+  </form>
+
+</div>
     <!-- QUESTIONS -->
 
     <div class="dashboard-section">

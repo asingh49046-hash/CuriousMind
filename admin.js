@@ -4,7 +4,10 @@ import {
   getDocs,
   deleteDoc,
   doc,
-  auth
+  addDoc,
+  auth,
+  onAuthStateChanged,
+  signOut
 } from './firebase.js';
 
 const adminContainer = document.getElementById('adminContainer');
