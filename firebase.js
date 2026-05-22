@@ -12,7 +12,9 @@ import {
 import {
   getAuth,
   signInWithEmailAndPassword,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
@@ -32,13 +34,19 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 export {
+
   db,
   auth,
+
   collection,
   addDoc,
   getDocs,
   deleteDoc,
   doc,
+
   signInWithEmailAndPassword,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  onAuthStateChanged,
+  signOut
+
 };

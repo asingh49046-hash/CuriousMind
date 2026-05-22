@@ -1,37 +1,29 @@
 import {
   auth,
   signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  onAuthStateChanged
+  sendPasswordResetEmail
 } from './firebase.js';
 
-/* AUTO REDIRECT */
+const form =
+document.getElementById('loginForm');
 
-onAuthStateChanged(auth, (user) => {
-
-  if(user){
-
-    window.location.href = 'admin.html';
-
-  }
-
-});
-
-const form = document.getElementById('loginForm');
-
-const loader = document.getElementById('loader');
+const loader =
+document.getElementById('loader');
 
 /* LOGIN */
 
-form.addEventListener('submit', async (e) => {
+form.addEventListener('submit',
+async (e)=>{
 
   e.preventDefault();
 
-  const email = document.getElementById('email').value;
+  const email =
+  document.getElementById('email').value;
 
-  const password = document.getElementById('password').value;
+  const password =
+  document.getElementById('password').value;
 
-  loader.style.display = 'flex';
+  loader.style.display='flex';
 
   try{
 
@@ -41,15 +33,15 @@ form.addEventListener('submit', async (e) => {
       password
     );
 
-    loader.style.display = 'none';
+    loader.style.display='none';
 
     alert('Login Successful');
 
-    window.location.href = 'admin.html';
+    window.location.href='admin.html';
 
-  } catch(error){
+  }catch(error){
 
-    loader.style.display = 'none';
+    loader.style.display='none';
 
     alert(error.message);
 
@@ -57,16 +49,18 @@ form.addEventListener('submit', async (e) => {
 
 });
 
-/* FORGOT PASSWORD */
+/* RESET PASSWORD */
 
 document.getElementById('forgotPassword')
-.addEventListener('click', async () => {
+.addEventListener('click',
+async ()=>{
 
-  const email = document.getElementById('email').value;
+  const email =
+  document.getElementById('email').value;
 
   if(!email){
 
-    alert('Enter your email first');
+    alert('Enter email first');
 
     return;
 
@@ -74,11 +68,16 @@ document.getElementById('forgotPassword')
 
   try{
 
-    await sendPasswordResetEmail(auth, email);
+    await sendPasswordResetEmail(
+      auth,
+      email
+    );
 
-    alert('Password reset email sent');
+    alert(
+      'Password reset email sent'
+    );
 
-  } catch(error){
+  }catch(error){
 
     alert(error.message);
 
