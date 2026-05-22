@@ -1,21 +1,12 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
 import {
   getFirestore,
   collection,
   addDoc,
   getDocs,
   deleteDoc,
-  doc
+  doc,
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD11Mi6wgkVmKol4-P37yMAJjA1ZNprZgs",
@@ -43,6 +34,7 @@ export {
   getDocs,
   deleteDoc,
   doc,
+  updateDoc,
 
   signInWithEmailAndPassword,
   sendPasswordResetEmail,

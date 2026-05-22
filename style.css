@@ -1107,3 +1107,64 @@ body{
   }
 
 }
+/* ACTION BUTTONS */
+
+.action-buttons{
+  display:flex;
+  gap:12px;
+}
+
+.edit-btn{
+  flex:1;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#2563eb;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.save-btn{
+  flex:1;
+  padding:16px;
+  border:none;
+  border-radius:12px;
+  background:#10b981;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.cancel-btn{
+  flex:1;
+  padding:16px;
+  border:none;
+  border-radius:12px;
+  background:#ef4444;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.popup-actions{
+  display:flex;
+  gap:15px;
+  margin-top:25px;
+}
+
+/* EDIT POPUP */
+
+.edit-popup-content{
+  background:white;
+  width:90%;
+  max-width:800px;
+  padding:35px;
+  border-radius:24px;
+  max-height:90vh;
+  overflow-y:auto;
+}
+
+.edit-popup-content h2{
+  margin-bottom:25px;
+}

@@ -5,11 +5,11 @@ import {
   deleteDoc,
   doc,
   addDoc,
+  updateDoc,
   auth,
   onAuthStateChanged,
   signOut
 } from './firebase.js';
-
 const adminContainer = document.getElementById('adminContainer');
 
 const totalQuestions = document.getElementById('totalQuestions');
@@ -52,12 +52,30 @@ async function loadAdminQuestions() {
 
         </div>
 
-        <button
-          class="delete-btn"
-          onclick="deleteQuestion('${item.id}')"
-        >
-          Delete Question
-        </button>
+<div class="action-buttons">
+
+  <button
+    class="edit-btn"
+    onclick="editQuestion(
+      '${item.id}',
+      `${data.question}`,
+      `${data.answer}`,
+      `${data.category}`,
+      `${data.username || ''}`,
+      `${data.tags || ''}`
+    )"
+  >
+    ✏️ Edit
+  </button>
+
+  <button
+    class="delete-btn"
+    onclick="deleteQuestion('${item.id}')"
+  >
+    🗑 Delete
+  </button>
+
+</div>
 
       </div>
 
@@ -123,5 +141,100 @@ document.getElementById('logoutBtn')
   auth.signOut();
 
   window.location.href = 'login.html';
+
+});
+/* EDIT QUESTION */
+
+const editPopup =
+document.getElementById('editPopup');
+
+const editForm =
+document.getElementById('editForm');
+
+/* OPEN EDIT */
+
+window.editQuestion = (
+  id,
+  question,
+  answer,
+  category,
+  username,
+  tags
+)=>{
+
+  editPopup.style.display='flex';
+
+  document.getElementById('editId').value=id;
+
+  document.getElementById('editQuestion').value=question;
+
+  document.getElementById('editAnswer').value=answer;
+
+  document.getElementById('editCategory').value=category;
+
+  document.getElementById('editUsername').value=username;
+
+  document.getElementById('editTags').value=tags;
+
+}
+
+/* CLOSE */
+
+window.closeEditPopup = ()=>{
+
+  editPopup.style.display='none';
+
+}
+
+/* SAVE EDIT */
+
+editForm.addEventListener(
+'submit',
+async (e)=>{
+
+  e.preventDefault();
+
+  const id =
+  document.getElementById('editId').value;
+
+  const updatedData = {
+
+    question:
+    document.getElementById('editQuestion').value,
+
+    answer:
+    document.getElementById('editAnswer').value,
+
+    category:
+    document.getElementById('editCategory').value,
+
+    username:
+    document.getElementById('editUsername').value,
+
+    tags:
+    document.getElementById('editTags').value
+
+  };
+
+  try{
+
+    await updateDoc(
+      doc(db,'questions',id),
+      updatedData
+    );
+
+    alert(
+      'Question Updated Successfully'
+    );
+
+    closeEditPopup();
+
+    loadAdminQuestions();
+
+  }catch(error){
+
+    alert(error.message);
+
+  }
 
 });

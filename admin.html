@@ -243,7 +243,101 @@
   </main>
 
 </div>
+<div id="adminContainer" class="admin-question-grid"></div>
 
+</main>
+
+</div>
+
+<!-- EDIT POPUP START -->
+
+<div id="editPopup" class="popup">
+
+  <div class="edit-popup-content">
+
+    <h2>
+      ✏️ Edit Question
+    </h2>
+
+    <form id="editForm">
+
+      <input type="hidden" id="editId">
+
+      <div class="admin-input-group">
+
+        <label>Question</label>
+
+        <input type="text" id="editQuestion">
+
+      </div>
+
+      <div class="admin-input-group">
+
+        <label>Answer</label>
+
+        <textarea id="editAnswer"></textarea>
+
+      </div>
+
+      <div class="admin-double">
+
+        <div class="admin-input-group">
+
+          <label>Category</label>
+
+          <input type="text" id="editCategory">
+
+        </div>
+
+        <div class="admin-input-group">
+
+          <label>Author</label>
+
+          <input type="text" id="editUsername">
+
+        </div>
+
+      </div>
+
+      <div class="admin-input-group">
+
+        <label>Tags</label>
+
+        <input type="text" id="editTags">
+
+      </div>
+
+      <div class="popup-actions">
+
+        <button
+          type="submit"
+          class="save-btn"
+        >
+          💾 Save Changes
+        </button>
+
+        <button
+          type="button"
+          class="cancel-btn"
+          onclick="closeEditPopup()"
+        >
+          ❌ Cancel
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+<!-- EDIT POPUP END -->
+
+<script type="module" src="admin.js"></script>
+
+</body>
+</html>
 <script type="module" src="admin.js"></script>
 
 </body>
