@@ -7,12 +7,10 @@ import {
 const form =
 document.getElementById('loginForm');
 
-const loader =
-document.getElementById('loader');
-
 /* LOGIN */
 
-form.addEventListener('submit',
+form.addEventListener(
+'submit',
 async (e)=>{
 
   e.preventDefault();
@@ -23,8 +21,6 @@ async (e)=>{
   const password =
   document.getElementById('password').value;
 
-  loader.style.display='flex';
-
   try{
 
     await signInWithEmailAndPassword(
@@ -33,15 +29,12 @@ async (e)=>{
       password
     );
 
-    loader.style.display='none';
-
     alert('Login Successful');
 
-    window.location.href='admin.html';
+    window.location.href =
+    'admin.html';
 
   }catch(error){
-
-    loader.style.display='none';
 
     alert(error.message);
 
@@ -49,10 +42,11 @@ async (e)=>{
 
 });
 
-/* RESET PASSWORD */
+/* FORGOT PASSWORD */
 
 document.getElementById('forgotPassword')
-.addEventListener('click',
+.addEventListener(
+'click',
 async ()=>{
 
   const email =

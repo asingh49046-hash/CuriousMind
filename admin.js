@@ -10,25 +10,56 @@ import {
   onAuthStateChanged,
   signOut
 } from './firebase.js';
-const adminContainer = document.getElementById('adminContainer');
 
-const totalQuestions = document.getElementById('totalQuestions');
+/* =========================
+   ADMIN PROTECTION
+========================= */
 
-const adminSearch = document.getElementById('adminSearch');
+onAuthStateChanged(auth, (user) => {
 
-/* LOAD QUESTIONS */
+  if(user){
 
-async function loadAdminQuestions() {
+    loadAdminQuestions();
 
-  const querySnapshot = await getDocs(collection(db, 'questions'));
+  }else{
+
+    window.location.href = 'login.html';
+
+  }
+
+});
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const adminContainer =
+document.getElementById('adminContainer');
+
+const adminSearch =
+document.getElementById('adminSearch');
+
+const adminQuestionForm =
+document.getElementById('adminQuestionForm');
+
+const editPopup =
+document.getElementById('editPopup');
+
+const editForm =
+document.getElementById('editForm');
+
+/* =========================
+   LOAD QUESTIONS
+========================= */
+
+async function loadAdminQuestions(){
+
+  const querySnapshot =
+  await getDocs(collection(db,'questions'));
 
   adminContainer.innerHTML = '';
 
-  let count = 0;
-
-  querySnapshot.forEach((item) => {
-
-    count++;
+  querySnapshot.forEach((item)=>{
 
     const data = item.data();
 
@@ -36,9 +67,13 @@ async function loadAdminQuestions() {
 
       <div class="admin-card">
 
-        <h3>${data.question}</h3>
+        <h3>
+          ${data.question}
+        </h3>
 
-        <p>${data.answer}</p>
+        <p>
+          ${data.answer}
+        </p>
 
         <div class="admin-meta">
 
@@ -47,35 +82,35 @@ async function loadAdminQuestions() {
           </span>
 
           <small>
-            👤 ${data.username || 'Anonymous'}
+            👤 ${data.username || 'Admin'}
           </small>
 
         </div>
 
-<div class="action-buttons">
+        <div class="action-buttons">
 
-  <button
-    class="edit-btn"
-    onclick="editQuestion(
-      '${item.id}',
-      `${data.question}`,
-      `${data.answer}`,
-      `${data.category}`,
-      `${data.username || ''}`,
-      `${data.tags || ''}`
-    )"
-  >
-    ✏️ Edit
-  </button>
+          <button
+            class="edit-btn"
+            onclick="editQuestion(
+              '${item.id}',
+              \`${data.question}\`,
+              \`${data.answer}\`,
+              \`${data.category}\`,
+              \`${data.username || ''}\`,
+              \`${data.tags || ''}\`
+            )"
+          >
+            ✏️ Edit
+          </button>
 
-  <button
-    class="delete-btn"
-    onclick="deleteQuestion('${item.id}')"
-  >
-    🗑 Delete
-  </button>
+          <button
+            class="delete-btn"
+            onclick="deleteQuestion('${item.id}')"
+          >
+            🗑 Delete
+          </button>
 
-</div>
+        </div>
 
       </div>
 
@@ -83,23 +118,82 @@ async function loadAdminQuestions() {
 
   });
 
-  totalQuestions.innerText = count;
-
 }
 
-loadAdminQuestions();
+/* =========================
+   ADD QUESTION
+========================= */
 
-/* DELETE */
+adminQuestionForm.addEventListener(
+'submit',
+async (e)=>{
 
-window.deleteQuestion = async (id) => {
+  e.preventDefault();
 
-  const confirmDelete = confirm(
+  const question =
+  document.getElementById('question').value;
+
+  const answer =
+  document.getElementById('answer').value;
+
+  const category =
+  document.getElementById('category').value;
+
+  const username =
+  document.getElementById('username').value;
+
+  const tags =
+  document.getElementById('tags').value;
+
+  try{
+
+    await addDoc(
+      collection(db,'questions'),
+      {
+
+        question,
+        answer,
+        category,
+        username,
+        tags,
+        createdAt:new Date()
+
+      }
+    );
+
+    alert(
+      'Question Published Successfully'
+    );
+
+    adminQuestionForm.reset();
+
+    loadAdminQuestions();
+
+  }catch(error){
+
+    alert(error.message);
+
+  }
+
+});
+
+/* =========================
+   DELETE QUESTION
+========================= */
+
+window.deleteQuestion =
+async (id)=>{
+
+  const confirmDelete =
+  confirm(
     'Are you sure you want to delete this question?'
   );
 
   if(confirmDelete){
 
-    await deleteDoc(doc(db, 'questions', id));
+    await deleteDoc(
+      doc(db,'questions',id)
+    );
 
     loadAdminQuestions();
 
@@ -107,25 +201,32 @@ window.deleteQuestion = async (id) => {
 
 }
 
-/* SEARCH */
+/* =========================
+   SEARCH QUESTIONS
+========================= */
 
-adminSearch.addEventListener('keyup', () => {
+adminSearch.addEventListener(
+'keyup',
+()=>{
 
-  const value = adminSearch.value.toLowerCase();
+  const value =
+  adminSearch.value.toLowerCase();
 
-  const cards = document.querySelectorAll('.admin-card');
+  const cards =
+  document.querySelectorAll('.admin-card');
 
-  cards.forEach(card => {
+  cards.forEach((card)=>{
 
-    const text = card.innerText.toLowerCase();
+    const text =
+    card.innerText.toLowerCase();
 
     if(text.includes(value)){
 
-      card.style.display = 'block';
+      card.style.display='block';
 
-    } else {
+    }else{
 
-      card.style.display = 'none';
+      card.style.display='none';
 
     }
 
@@ -133,25 +234,9 @@ adminSearch.addEventListener('keyup', () => {
 
 });
 
-/* LOGOUT */
-
-document.getElementById('logoutBtn')
-.addEventListener('click', () => {
-
-  auth.signOut();
-
-  window.location.href = 'login.html';
-
-});
-/* EDIT QUESTION */
-
-const editPopup =
-document.getElementById('editPopup');
-
-const editForm =
-document.getElementById('editForm');
-
-/* OPEN EDIT */
+/* =========================
+   OPEN EDIT POPUP
+========================= */
 
 window.editQuestion = (
   id,
@@ -178,7 +263,9 @@ window.editQuestion = (
 
 }
 
-/* CLOSE */
+/* =========================
+   CLOSE EDIT POPUP
+========================= */
 
 window.closeEditPopup = ()=>{
 
@@ -186,7 +273,9 @@ window.closeEditPopup = ()=>{
 
 }
 
-/* SAVE EDIT */
+/* =========================
+   SAVE EDIT
+========================= */
 
 editForm.addEventListener(
 'submit',
@@ -197,30 +286,28 @@ async (e)=>{
   const id =
   document.getElementById('editId').value;
 
-  const updatedData = {
-
-    question:
-    document.getElementById('editQuestion').value,
-
-    answer:
-    document.getElementById('editAnswer').value,
-
-    category:
-    document.getElementById('editCategory').value,
-
-    username:
-    document.getElementById('editUsername').value,
-
-    tags:
-    document.getElementById('editTags').value
-
-  };
-
   try{
 
     await updateDoc(
       doc(db,'questions',id),
-      updatedData
+      {
+
+        question:
+        document.getElementById('editQuestion').value,
+
+        answer:
+        document.getElementById('editAnswer').value,
+
+        category:
+        document.getElementById('editCategory').value,
+
+        username:
+        document.getElementById('editUsername').value,
+
+        tags:
+        document.getElementById('editTags').value
+
+      }
     );
 
     alert(
@@ -236,5 +323,20 @@ async (e)=>{
     alert(error.message);
 
   }
+
+});
+
+/* =========================
+   LOGOUT
+========================= */
+
+document.getElementById('logoutBtn')
+.addEventListener(
+'click',
+async ()=>{
+
+  await signOut(auth);
+
+  window.location.href='login.html';
 
 });

@@ -1,3 +1,5 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 import {
   getFirestore,
   collection,
@@ -7,6 +9,16 @@ import {
   doc,
   updateDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
   apiKey: "AIzaSyD11Mi6wgkVmKol4-P37yMAJjA1ZNprZgs",
@@ -18,11 +30,15 @@ const firebaseConfig = {
   measurementId: "G-LWM5SGL2QK"
 };
 
+/* INITIALIZE */
+
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
 const auth = getAuth(app);
+
+/* EXPORTS */
 
 export {
 
