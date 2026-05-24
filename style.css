@@ -1699,3 +1699,76 @@ body{
   cursor:pointer;
   font-size:20px;
 }
+/* REQUEST DELETE BUTTON */
+
+.request-delete-btn{
+  margin-top:15px;
+
+  width:100%;
+
+  padding:14px;
+
+  border:none;
+
+  border-radius:14px;
+
+  background:#ef4444;
+
+  color:white;
+
+  font-size:15px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.request-delete-btn:hover{
+
+  transform:translateY(-2px);
+
+  background:#dc2626;
+
+}
+/* QUILL EDITOR */
+
+#toolbar{
+  background:white;
+  border-radius:14px 14px 0 0;
+  border:1px solid #ddd;
+}
+
+#editor{
+  background:white;
+  min-height:250px;
+  border:1px solid #ddd;
+  border-top:none;
+  border-radius:0 0 14px 14px;
+  margin-bottom:20px;
+}
+
+.rich-answer{
+  line-height:1.9;
+  font-size:16px;
+}
+
+.rich-answer strong{
+  font-weight:700;
+}
+
+.rich-answer em{
+  font-style:italic;
+}
+
+.rich-answer ol,
+.rich-answer ul{
+  padding-left:25px;
+}
+
+.rich-answer img{
+  width:100%;
+  border-radius:14px;
+  margin-top:15px;
+}

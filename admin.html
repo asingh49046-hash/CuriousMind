@@ -12,7 +12,12 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-</head>
+  <link
+  href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css"
+  rel="stylesheet"
+/>
+
+  </head>
 
 <body>
 
@@ -117,11 +122,33 @@
             Detailed Answer
           </label>
 
-          <textarea
-            id="answer"
-            placeholder="Write detailed explanation..."
-            required
-          ></textarea>
+          <div id="toolbar">
+
+  <button class="ql-bold"></button>
+
+  <button class="ql-italic"></button>
+
+  <button class="ql-underline"></button>
+
+  <button class="ql-strike"></button>
+
+  <button class="ql-blockquote"></button>
+
+  <button class="ql-code-block"></button>
+
+  <button class="ql-list" value="ordered"></button>
+
+  <button class="ql-list" value="bullet"></button>
+
+  <button class="ql-link"></button>
+
+  <button class="ql-image"></button>
+
+  <button class="ql-clean"></button>
+
+</div>
+
+          <div id="editor"></div>
 
         </div>
 
@@ -306,6 +333,8 @@
 </div>
 
 <script type="module" src="admin.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
 
 </body>
 </html>

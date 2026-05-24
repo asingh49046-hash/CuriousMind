@@ -12,6 +12,23 @@ import {
 } from './firebase.js';
 
 /* =========================
+   QUILL EDITOR
+========================= */
+
+const quill = new Quill(
+  '#editor',
+  {
+
+    theme:'snow',
+
+    modules:{
+      toolbar:'#toolbar'
+    }
+
+  }
+);
+
+/* =========================
    ADMIN PROTECTION
 ========================= */
 
@@ -71,9 +88,9 @@ async function loadAdminQuestions(){
           ${data.question}
         </h3>
 
-        <p>
-          ${data.answer}
-        </p>
+         <div class="rich-answer">
+           ${data.answer}
+         </div>
 
         <div class="admin-meta">
 
@@ -133,8 +150,8 @@ async (e)=>{
   const question =
   document.getElementById('question').value;
 
-  const answer =
-  document.getElementById('answer').value;
+const answer =
+quill.root.innerHTML;
 
   const category =
   document.getElementById('category').value;
@@ -253,7 +270,7 @@ window.editQuestion = (
 
   document.getElementById('editQuestion').value=question;
 
-  document.getElementById('editAnswer').value=answer;
+document.getElementById('editAnswer').innerHTML=answer;
 
   document.getElementById('editCategory').value=category;
 
@@ -358,28 +375,70 @@ async function loadRequests(){
 
     const data = item.data();
 
-    requestContainer.innerHTML += `
+   requestContainer.innerHTML += `
 
-      <div class="request-card">
+  <div class="request-card">
 
-        <h3>
-          ❓ ${data.question}
-        </h3>
+    <h3>
+      ❓ ${data.question}
+    </h3>
 
-        <p>
-          👤 ${data.name}
-        </p>
+    <p>
+      👤 ${data.name}
+    </p>
 
-        <p>
-          📧 ${data.email}
-        </p>
+    <p>
+      📧 ${data.email}
+    </p>
 
-      </div>
+    <button
+      class="request-delete-btn"
+      onclick="deleteRequest('${item.id}')"
+    >
+      🗑 Delete Request
+    </button>
 
-    `;
+  </div>
+
+`;
 
   });
 
 }
 
 loadRequests();
+/* =========================
+   DELETE USER REQUEST
+========================= */
+
+window.deleteRequest =
+async (id)=>{
+
+  const confirmDelete =
+  confirm(
+    'Delete this user request?'
+  );
+
+  if(confirmDelete){
+
+    try{
+
+      await deleteDoc(
+        doc(db,'requests',id)
+      );
+
+      alert(
+        'Request Deleted Successfully'
+      );
+
+      loadRequests();
+
+    }catch(error){
+
+      alert(error.message);
+
+    }
+
+  }
+
+}
