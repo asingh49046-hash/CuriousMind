@@ -1,3 +1,6 @@
+style.css
+
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -1771,4 +1774,16 @@ body{
   width:100%;
   border-radius:14px;
   margin-top:15px;
+}
+/* FIX PUBLISH BUTTON CLICK */
+
+#editor{
+  position:relative;
+  z-index:1;
+}
+
+.admin-form button{
+  position:relative;
+  z-index:999;
+  cursor:pointer;
 }

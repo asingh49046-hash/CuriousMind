@@ -18,13 +18,11 @@ import {
 const quill = new Quill(
   '#editor',
   {
-
     theme:'snow',
 
     modules:{
       toolbar:'#toolbar'
     }
-
   }
 );
 
@@ -32,15 +30,17 @@ const quill = new Quill(
    ADMIN PROTECTION
 ========================= */
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, (user)=>{
 
   if(user){
 
     loadAdminQuestions();
 
+    loadRequests();
+
   }else{
 
-    window.location.href = 'login.html';
+    window.location.href='login.html';
 
   }
 
@@ -65,75 +65,87 @@ document.getElementById('editPopup');
 const editForm =
 document.getElementById('editForm');
 
+const requestContainer =
+document.getElementById('requestContainer');
+
 /* =========================
    LOAD QUESTIONS
 ========================= */
 
 async function loadAdminQuestions(){
 
-  const querySnapshot =
-  await getDocs(collection(db,'questions'));
+  try{
 
-  adminContainer.innerHTML = '';
+    const querySnapshot =
+    await getDocs(
+      collection(db,'questions')
+    );
 
-  querySnapshot.forEach((item)=>{
+    adminContainer.innerHTML='';
 
-    const data = item.data();
+    querySnapshot.forEach((item)=>{
 
-    adminContainer.innerHTML += `
+      const data = item.data();
 
-      <div class="admin-card">
+      adminContainer.innerHTML += `
 
-        <h3>
-          ${data.question}
-        </h3>
+        <div class="admin-card">
 
-         <div class="rich-answer">
-           ${data.answer}
-         </div>
+          <h3>
+            ${data.question}
+          </h3>
 
-        <div class="admin-meta">
+          <div class="rich-answer">
+            ${data.answer}
+          </div>
 
-          <span class="category-badge">
-            ${data.category}
-          </span>
+          <div class="admin-meta">
 
-          <small>
-            👤 ${data.username || 'Admin'}
-          </small>
+            <span class="category-badge">
+              ${data.category}
+            </span>
+
+            <small>
+              👤 ${data.username || 'Admin'}
+            </small>
+
+          </div>
+
+          <div class="action-buttons">
+
+            <button
+              class="edit-btn"
+              onclick="editQuestion(
+                '${item.id}',
+                \`${data.question}\`,
+                \`${data.answer}\`,
+                \`${data.category}\`,
+                \`${data.username || ''}\`
+              )"
+            >
+              ✏️ Edit
+            </button>
+
+            <button
+              class="delete-btn"
+              onclick="deleteQuestion('${item.id}')"
+            >
+              🗑 Delete
+            </button>
+
+          </div>
 
         </div>
 
-        <div class="action-buttons">
+      `;
 
-          <button
-            class="edit-btn"
-            onclick="editQuestion(
-              '${item.id}',
-              \`${data.question}\`,
-              \`${data.answer}\`,
-              \`${data.category}\`,
-              \`${data.username || ''}\`,
-              \`${data.tags || ''}\`
-            )"
-          >
-            ✏️ Edit
-          </button>
+    });
 
-          <button
-            class="delete-btn"
-            onclick="deleteQuestion('${item.id}')"
-          >
-            🗑 Delete
-          </button>
+  }catch(error){
 
-        </div>
+    alert(error.message);
 
-      </div>
-
-    `;
-
-  });
+  }
 
 }
 
@@ -148,19 +160,28 @@ async (e)=>{
   e.preventDefault();
 
   const question =
-  document.getElementById('question').value;
+  document.getElementById('question')
+  .value
+  .trim();
 
-const answer =
-quill.root.innerHTML;
+  const answer =
+  quill.root.innerHTML.trim();
+
+  if(answer === '<p><br></p>'){
+
+    alert('Please write answer');
+
+    return;
+
+  }
 
   const category =
-  document.getElementById('category').value;
+  document.getElementById('category')
+  .value;
 
   const username =
-  document.getElementById('username').value;
-
-  const tags =
-  document.getElementById('tags').value;
+  document.getElementById('username')
+  .value;
 
   try{
 
@@ -172,7 +193,6 @@ quill.root.innerHTML;
         answer,
         category,
         username,
-        tags,
         createdAt:new Date()
 
       }
@@ -183,6 +203,8 @@ quill.root.innerHTML;
     );
 
     adminQuestionForm.reset();
+
+    quill.root.innerHTML='';
 
     loadAdminQuestions();
 
@@ -203,16 +225,28 @@ async (id)=>{
 
   const confirmDelete =
   confirm(
-    'Are you sure you want to delete this question?'
+    'Delete this question?'
   );
 
   if(confirmDelete){
 
-    await deleteDoc(
-      doc(db,'questions',id)
-    );
+    try{
 
-    loadAdminQuestions();
+      await deleteDoc(
+        doc(db,'questions',id)
+      );
+
+      alert(
+        'Question Deleted'
+      );
+
+      loadAdminQuestions();
+
+    }catch(error){
+
+      alert(error.message);
+
+    }
 
   }
 
@@ -260,23 +294,25 @@ window.editQuestion = (
   question,
   answer,
   category,
-  username,
-  tags
+  username
 )=>{
 
   editPopup.style.display='flex';
 
-  document.getElementById('editId').value=id;
+  document.getElementById('editId')
+  .value=id;
 
-  document.getElementById('editQuestion').value=question;
+  document.getElementById('editQuestion')
+  .value=question;
 
-document.getElementById('editAnswer').innerHTML=answer;
+  document.getElementById('editAnswer')
+  .value=answer;
 
-  document.getElementById('editCategory').value=category;
+  document.getElementById('editCategory')
+  .value=category;
 
-  document.getElementById('editUsername').value=username;
-
-  document.getElementById('editTags').value=tags;
+  document.getElementById('editUsername')
+  .value=username;
 
 }
 
@@ -301,7 +337,8 @@ async (e)=>{
   e.preventDefault();
 
   const id =
-  document.getElementById('editId').value;
+  document.getElementById('editId')
+  .value;
 
   try{
 
@@ -310,19 +347,20 @@ async (e)=>{
       {
 
         question:
-        document.getElementById('editQuestion').value,
+        document.getElementById('editQuestion')
+        .value,
 
         answer:
-        document.getElementById('editAnswer').value,
+        document.getElementById('editAnswer')
+        .value,
 
         category:
-        document.getElementById('editCategory').value,
+        document.getElementById('editCategory')
+        .value,
 
         username:
-        document.getElementById('editUsername').value,
-
-        tags:
-        document.getElementById('editTags').value
+        document.getElementById('editUsername')
+        .value
 
       }
     );
@@ -344,69 +382,61 @@ async (e)=>{
 });
 
 /* =========================
-   LOGOUT
-========================= */
-
-document.getElementById('logoutBtn')
-.addEventListener(
-'click',
-async ()=>{
-
-  await signOut(auth);
-
-  window.location.href='login.html';
-
-});
-/* =========================
    LOAD USER REQUESTS
 ========================= */
 
-const requestContainer =
-document.getElementById('requestContainer');
-
 async function loadRequests(){
 
-  const querySnapshot =
-  await getDocs(collection(db,'requests'));
+  try{
 
-  requestContainer.innerHTML='';
+    const querySnapshot =
+    await getDocs(
+      collection(db,'requests')
+    );
 
-  querySnapshot.forEach((item)=>{
+    requestContainer.innerHTML='';
 
-    const data = item.data();
+    querySnapshot.forEach((item)=>{
 
-   requestContainer.innerHTML += `
+      const data = item.data();
 
-  <div class="request-card">
+      requestContainer.innerHTML += `
 
-    <h3>
-      ❓ ${data.question}
-    </h3>
+        <div class="request-card">
 
-    <p>
-      👤 ${data.name}
-    </p>
+          <h3>
+            ❓ ${data.question}
+          </h3>
 
-    <p>
-      📧 ${data.email}
-    </p>
+          <p>
+            👤 ${data.name}
+          </p>
 
-    <button
-      class="request-delete-btn"
-      onclick="deleteRequest('${item.id}')"
-    >
-      🗑 Delete Request
-    </button>
+          <p>
+            📧 ${data.email}
+          </p>
 
-  </div>
+          <button
+            class="request-delete-btn"
+            onclick="deleteRequest('${item.id}')"
+          >
+            🗑 Delete Request
+          </button>
 
-`;
+        </div>
 
-  });
+      `;
+
+    });
+
+  }catch(error){
+
+    alert(error.message);
+
+  }
 
 }
 
-loadRequests();
 /* =========================
    DELETE USER REQUEST
 ========================= */
@@ -416,7 +446,7 @@ async (id)=>{
 
   const confirmDelete =
   confirm(
-    'Delete this user request?'
+    'Delete this request?'
   );
 
   if(confirmDelete){
@@ -442,3 +472,18 @@ async (id)=>{
   }
 
 }
+
+/* =========================
+   LOGOUT
+========================= */
+
+document.getElementById('logoutBtn')
+.addEventListener(
+'click',
+async ()=>{
+
+  await signOut(auth);
+
+  window.location.href='login.html';
+
+});
